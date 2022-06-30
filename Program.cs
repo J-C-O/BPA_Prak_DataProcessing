@@ -53,6 +53,9 @@ while(true) {
         eventIdx = 0;
     }
 
+    if(eventIdx == 1) {
+        uId++;
+    }
     //Bonus: use the Random-Object from above to simulate a processing time between 3 and 11 seconds
     //simulatedProcessTime = ...
 
