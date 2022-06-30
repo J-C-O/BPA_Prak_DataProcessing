@@ -3,10 +3,12 @@ using Microsoft.Azure.Devices.Client;
 using Newtonsoft.Json;
 using System.Threading;
 
+//ToDo's: TASK-1, TASK-2 and TASK-3 + optional Bonus
+
 //Telemetry-Data
 int uId = 1;
 int eventIdx = 0;
-string[] eventTypes = {start, end};
+string[] eventTypes = {"start", "end"};
 string timeStamp;
 string messageString;
 
@@ -35,11 +37,11 @@ while(true) {
 
     var telemetryData = new {
         UID = uId,
-        EventType = eventTypes[eventIdx];
+        EventType = eventTypes[eventIdx],
         TimeStamp = timeStamp
     }
 
-    messageString = JsonConvert.SerializeObject(sensorData);
+    messageString = JsonConvert.SerializeObject(telemetryData);
     Message message = new Message(Encoding.ASCII.GetBytes(messageString));
 
     await deviceClient.SendEventAsync(message);
@@ -53,4 +55,6 @@ while(true) {
 
     //Bonus: use the Random-Object from above to simulate a processing time between 3 and 11 seconds
     //simulatedProcessTime = ...
+
+    await Task.Delay(3500);
 }
